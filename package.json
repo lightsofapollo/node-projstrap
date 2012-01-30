@@ -1,0 +1,30 @@
+{
+  "name": "spec-bootstrap",
+  "version": "0.1.0",
+  "author": "James Lal <james@lightsofapollo.com>",
+  "description": "Spec Runner Bootstrap",
+  "main": "./lib/bootstrap",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lightsofapollo/node-spec-boostrap.git"
+  },
+  "keywords": [
+    "spec",
+    "watchr",
+    "growl"
+  ],
+  "dependencies" : {
+    "growl"   :  "*",
+    "fl-watch-tree" :  "0.1.x"
+  },
+  "devDependencies": {
+    "mocha"    :  "*",
+    "expect.js"    :  "*"
+  },
+  "license": "MIT",
+  "engine": {
+    "node": ">=0.4"
+  }
+}
+
+
