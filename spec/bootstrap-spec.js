@@ -148,7 +148,7 @@ describe("bootstrap", function(){
     shouldReturnPathDetails = function(path, isSpec){
 
       beforeEach(function(){
-        results = subject.pathDetails(path);
+        results = subject.pathDetails(root + '/' + path);
       });
 
       it("should have .isSpec === " + isSpec, function(){
