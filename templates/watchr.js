@@ -64,43 +64,4 @@ watchr.on('change', function(event){
 watchr.start();
 
 
-var Strap = require('projstrap'),
-    Suite = Strap.Suite,
-    Watchr = Strap.Watchr,
-    suiteOptions,
-    watchr,
-    exec = require('child_process').exec,
-    cmd = 'mocha --growl -c --reporter spec ';
-
-
-suiteOptions = {
-  libPath: 'lib/',
-  specPath: 'spec/',
-  libSuffix: '.js',
-  specSuffix: '-spec.js'
-};
-
-
-watchr = new Watchr(__dirname, {
-  rate: 2
-});
-
-
-watchr.on('change', function(event){
-  var spec = strap.pathDetails(event.path);
-
-  exec(cmd + spec.specPath, function(err, stdout, stderr){
-    if(err){
-      console.log('Node Error: ', err);
-    }
-
-    if(stderr){
-      console.error(stderr);
-    }
-
-    console.log(stdout);
-  });
-});
-
-watchr.start();
 
