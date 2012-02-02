@@ -1,20 +1,21 @@
 {
-  "name": "spec-bootstrap",
+  "name": "projstrap",
   "version": "0.1.0",
   "author": "James Lal <james@lightsofapollo.com>",
-  "description": "Spec Runner Bootstrap",
+  "description": "Minimal NodeJS Project Bootstrapper oriented around (B|T)DD",
   "main": "./lib/bootstrap",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lightsofapollo/node-spec-boostrap.git"
+    "url": "https://github.com/lightsofapollo/node-projstrap.git"
   },
   "keywords": [
     "spec",
     "watchr",
-    "growl"
+    "tdd",
+    "bdd",
+    "bootstrap"
   ],
   "dependencies" : {
-    "growl"   :  "*",
     "fl-watch-tree" :  "0.1.x"
   },
   "devDependencies": {
