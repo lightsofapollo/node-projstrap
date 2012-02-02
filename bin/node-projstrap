@@ -1,0 +1,38 @@
+#! /usr/bin/env node
+
+var argv,
+    path = require('path'),
+    Cli = require('../lib/cli'),
+    opt = require('optimist')
+    .usage("Usage node-projstrap --create [path]")
+
+    .option('create', {
+      desc: 'Path to new project'
+    })
+
+    .option('template', {
+      alias: 't',
+      desc: 'For future use of templates'
+    })
+    .demand('create'),
+    cli;
+
+options = opt.argv;
+
+if(options.help){
+  opt.showHelp();
+  return;
+}
+
+if(options.create && path.existsSync(options.create)){
+  cli = new Cli(options.create);
+
+  console.log('Creating ', path.join(cli.path, 'spec/'));
+  cli.createDir('spec');
+  console.log('Creating ', path.join(cli.path, 'watchr.js'));
+  cli.copyFile(__dirname + '/../templates/watchr.js', 'watchr.js');
+
+} else {
+  console.error("Create must provide a valid path path", options.create, 'does not exist');
+}
+
