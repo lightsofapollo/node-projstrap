@@ -29,6 +29,10 @@ if(options.create && path.existsSync(options.create)){
 
   console.log('Creating ', path.join(cli.path, 'spec/'));
   cli.createDir('spec');
+
+  console.log('Creating ', path.join(cli.path, 'spec/helper.js'));
+  cli.copyFile(__dirname + '/../templates/helper.js', 'spec/helper.js');
+
   console.log('Creating ', path.join(cli.path, 'watchr.js'));
   cli.copyFile(__dirname + '/../templates/watchr.js', 'watchr.js');
 

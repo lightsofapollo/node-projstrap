@@ -139,6 +139,51 @@ describe("suite", function(){
 
   });
 
+  describe(".matchesType", function(){
+
+    var matches = {
+      lib: {
+        'lib/foo.js': true,
+        'lib/MyOtherFoo.js': true,
+        //Because suffix is .js
+        'lib/MyFooSpec.js': true
+      },
+
+      spec: {
+        'spec/foo.js': false,
+        'spec/spec-spec.js': true,
+        'spec/Other-spec.js': true,
+        'spec/MyOtherFooSpec.js': false
+      }
+    }, type, path, expected;
+
+    //Ok, this is bad.
+    //When let is introduced we can use that
+    for(type in matches){
+
+      (function(type){
+
+        describe("when matching for " + type, function(){
+          for(path in matches[type]){
+            (function(path, expected){
+              it("should return " + expected + " when given " + path, function(){
+                expect(subject.matchesType(type, path)).to.be(expected);
+              });
+            }(path, matches[type][path]));
+          }
+        });
+
+      }(type));
+    }
+
+    it("should throw an error when given an invalid type", function(){
+      expect(function(){
+        subject.matchesType('fake', 'foo')
+      }).to.throwException();
+    });
+
+  });
+
   describe('.specFromPath', function(){
 
     var results;
@@ -170,6 +215,19 @@ describe("suite", function(){
       });
 
     };
+
+    describe("when given a path that matches dir but not suffix", function(){
+
+      beforeEach(function(){
+        results = subject.specFromPath(root + '/' + 'spec/foo.js');
+      });
+
+      it("should set isSpec & isLib to false", function(){
+        expect(results.isLib).to.be(false);
+        expect(results.isSpec).to.be(false);
+      });
+
+    });
 
     describe("results after given a spec path", function(){
       shouldReturnPathDetails(specPath, true);
