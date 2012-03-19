@@ -1,0 +1,22 @@
+{
+  "name": "<%= get('package.name') %>",
+  "version": "<%= get('package.version') %>",
+  "author": "<%= get('package.author') %>",
+  "description": "<%= get('package.description') %>",
+  "main": "<%= get('package.main') %>",
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<%= get('github.url') %>.git"
+  },
+
+  "keywords": [<%- '\n    "' + get('package.tags').split(',').join('",\n    "') + '"\n  ' %>],
+  "dependencies" : {
+  },
+  "devDependencies": {
+  },
+  "license": "<%= get('package.license') %>",
+  "engine": {
+    "node": ">=0.4"
+  }
+}

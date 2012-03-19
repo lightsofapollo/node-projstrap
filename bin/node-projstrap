@@ -1,42 +1,36 @@
 #! /usr/bin/env node
 
-var argv,
-    path = require('path'),
-    Cli = require('../lib/cli'),
-    opt = require('optimist')
-    .usage("Usage node-projstrap --create [path]")
+var args = process.argv.slice(2),
+    command = args.shift(),
+    commands = [],
+    commandClass, e,
+    optimist = require('optimist');
 
-    .option('create', {
-      desc: 'Path to new project'
-    })
 
-    .option('template', {
-      alias: 't',
-      desc: 'For future use of templates'
-    })
-    .demand('create'),
-    cli;
+//global options
+optimist.option('projectPath', {
+  alias: 'p',
+  desc: "Path to load additional project types from may be passed multiple times"
+});
 
-options = opt.argv;
+commands.push({
+  name: "create",
+  description: "creates a new project"
+});
 
-if(options.help){
-  opt.showHelp();
-  return;
-}
+commands.push({
+  name: "list-projects",
+  description: "lists all available types of projects"
+});
 
-if(options.create && path.existsSync(options.create)){
-  cli = new Cli(options.create);
+if(!command){
+  console.log("\nNo command given please use one of these:\n");
 
-  console.log('Creating ', path.join(cli.path, 'spec/'));
-  cli.createDir('spec');
-
-  console.log('Creating ', path.join(cli.path, 'spec/helper.js'));
-  cli.copyFile(__dirname + '/../templates/helper.js', 'spec/helper.js');
-
-  console.log('Creating ', path.join(cli.path, 'watchr.js'));
-  cli.copyFile(__dirname + '/../templates/watchr.js', 'watchr.js');
-
+  commands.forEach(function(command){
+    console.log('    %s : %s', command.name, command.description);
+  });
+  console.log('');
 } else {
-  console.error("Create must provide a valid path path", options.create, 'does not exist');
+  commandClass = require('../lib/cli/' + command);
+  (new commandClass(args)).run();
 }
-

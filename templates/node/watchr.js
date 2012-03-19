@@ -1,9 +1,10 @@
-var Projstrap = require('./lib/bootstrap'),
+var Projstrap = require('projstrap'),
 
     exec = require('child_process').exec,
 
     //Command to run tests (change this to whatever you use)
-    cmd = 'mocha --growl -c --reporter spec spec/helper.js ',
+    specHelper = __dirname + '/spec/helper.js',
+    cmd = 'mocha --require ' + specHelper + ' --growl -c --reporter spec ',
     watchr,
     suite;
 
@@ -62,5 +63,6 @@ watchr.on('change', function(event){
 });
 
 watchr.start();
+
 
 

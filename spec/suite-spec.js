@@ -1,4 +1,3 @@
-var expect = require('expect.js');
 
 describe("suite", function(){
 
@@ -66,7 +65,7 @@ describe("suite", function(){
         if(overrides.hasOwnProperty(key)){
           (function(){
             it("should allow overriding " + key, function(){
-              expect(subject[key]).to.eql(overrides[key])
+              expect(subject[key]).to.eql(overrides[key]);
             });
           }(key));
         }
@@ -98,7 +97,7 @@ describe("suite", function(){
         (function(ptn){
           it("should have created a pattern " + ptn + " " + expected[ptn].toString(), function(){
             expect(subject.patterns[ptn]).to.be.a(RegExp);
-            expect(subject.patterns[ptn].toString()).to.eql(expected[ptn]);
+            expect(subject.patterns[ptn].toString()).to.be(expected[ptn].toString());
           });
         }(ptn));
       }
@@ -178,7 +177,7 @@ describe("suite", function(){
 
     it("should throw an error when given an invalid type", function(){
       expect(function(){
-        subject.matchesType('fake', 'foo')
+        subject.matchesType('fake', 'foo');
       }).to.throwException();
     });
 
